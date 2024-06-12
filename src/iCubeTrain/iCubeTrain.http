@@ -1,0 +1,6 @@
+@iCubeTrain_HostAddress = http://localhost:5147
+
+GET {{iCubeTrain_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

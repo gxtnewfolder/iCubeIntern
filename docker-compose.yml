@@ -1,0 +1,38 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
+
+version: '3.4'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=user1@password1 
+    ports:
+      - "1433:1433"
+
+  ftp:
+    image: fauria/vsftpd # Or your preferred FTP server image
+    environment:
+      - FTP_USER=user1
+      - FTP_PASS=user1
+      - PASV_ADDRESS=127.0.0.1
+      - PASV_MIN_PORT=21100
+      - PASV_MAX_PORT=21110
+    ports:
+      - "21:21"
+      - "21100-21110:21100-21110"
+    volumes:
+      - /path/to/ftp-data:/home/vsftpd
+
+  icubetrain:
+    image: icubetrain
+    build:
+      context: .
+      dockerfile: src/iCubeTrain/Dockerfile
+    ports:
+      - 8000:80
+    depends_on:
+      - mssql
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=localhost,1433;Database=iCubeTrainDb;User Id=sa;Password=user1@password1;TrustServerCertificate=True;
