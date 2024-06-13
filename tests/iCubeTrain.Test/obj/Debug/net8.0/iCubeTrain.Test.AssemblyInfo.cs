@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("iCubeTrain.Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1970ab6d7d5a3f7b287f91d95eb6f4a81ffd622b")]
 [assembly: System.Reflection.AssemblyProductAttribute("iCubeTrain.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("iCubeTrain.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

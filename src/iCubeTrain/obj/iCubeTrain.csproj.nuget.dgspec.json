@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\work\\iCubeIntern\\src\\iCubeTrain\\iCubeTrain.csproj": {}
+    "/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/iCubeTrain.csproj": {}
   },
   "projects": {
-    "D:\\work\\iCubeIntern\\src\\iCubeTrain\\iCubeTrain.csproj": {
+    "/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/iCubeTrain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\work\\iCubeIntern\\src\\iCubeTrain\\iCubeTrain.csproj",
+        "projectUniqueName": "/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/iCubeTrain.csproj",
         "projectName": "iCubeTrain",
-        "projectPath": "D:\\work\\iCubeIntern\\src\\iCubeTrain\\iCubeTrain.csproj",
-        "packagesPath": "C:\\Users\\Ead\\.nuget\\packages\\",
-        "outputPath": "D:\\work\\iCubeIntern\\src\\iCubeTrain\\obj\\",
+        "projectPath": "/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/iCubeTrain.csproj",
+        "packagesPath": "/Users/gxtnewfolder/.nuget/packages/",
+        "outputPath": "/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ead\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/gxtnewfolder/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -89,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

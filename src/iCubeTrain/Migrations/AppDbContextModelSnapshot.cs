@@ -51,13 +51,13 @@ namespace iCubeTrain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6b5b6d25-1d7f-45ca-b531-319cf246a1fe",
+                            Id = "bac18b85-c01b-424a-bb7a-55f963da11c3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "5225fcc0-47f2-4c7e-b508-d9e65cd0c95b",
+                            Id = "f0b3260c-87c6-42b7-9dbd-84505848695f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
