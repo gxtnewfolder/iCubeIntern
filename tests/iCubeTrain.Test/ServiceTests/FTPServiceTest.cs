@@ -14,7 +14,7 @@ namespace iCubeTrain.Test.ServiceTests
         {
             // Arrange
             var ftpService = new FTPService();
-            var ftpServerUrl = "ftp://localhost";
+            var ftpServerUrl = "ftp://localhost:8003";
             var ftpUsername = "user1";
             var ftpPassword = "user1";
 

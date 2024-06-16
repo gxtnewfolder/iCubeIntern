@@ -1,32 +1,63 @@
+using iCubeTrain.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
 
-namespace iCubeTrain.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+namespace iCubeTrain.Controllers
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+    [Route("api/[controller]")]
+    [ApiController]
 
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public class WeatherForecastController : ControllerBase
     {
-        _logger = logger;
-    }
+        private readonly IUnitOfWork unitOfWork;
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
-    {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        public WeatherForecastController(IUnitOfWork unitOfWork)
         {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+            this.unitOfWork = unitOfWork;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllWeatherForecasts()
+        {
+            return Ok(await unitOfWork.WeatherForecasts.GetAllAsync());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetWeatherForecast(int id)
+        {
+            return Ok(await unitOfWork.WeatherForecasts.GetByIdAsync(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddWeatherForecast(WeatherForecast weatherForecast)
+        {
+            await unitOfWork.WeatherForecasts.AddAsync(weatherForecast);
+            await unitOfWork.CompleteAsync();
+            return CreatedAtAction(nameof(GetAllWeatherForecasts), new { id = weatherForecast.Id }, weatherForecast);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateWeatherForecast(int id, WeatherForecast weatherForecast)
+        {
+            if (id != weatherForecast.Id)
+            {
+                return BadRequest();
+            }
+            await unitOfWork.WeatherForecasts.UpdateAsync(weatherForecast);
+            await unitOfWork.CompleteAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteWeatherForecast(int id)
+        {
+            var weatherForecast = await unitOfWork.WeatherForecasts.GetByIdAsync(id);
+            if (weatherForecast == null)
+            {
+                return NotFound();
+            }
+            await unitOfWork.WeatherForecasts.DeleteAsync(id);
+            await unitOfWork.CompleteAsync();
+            return NoContent();
+        }
     }
 }

@@ -2,16 +2,23 @@
 
 version: '3.4'
 
+networks:
+  icubetrain-network:
+
 services:
-  mssql:
+  mssqldb:
+    container_name: mssql
     image: mcr.microsoft.com/mssql/server
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=user1@password1 
     ports:
-      - "1433:1433"
+      - "8002:1433"
+    networks:
+      - icubetrain-network
 
   ftp:
+    container_name: ftp
     image: fauria/vsftpd # Or your preferred FTP server image
     environment:
       - FTP_USER=user1
@@ -20,19 +27,24 @@ services:
       - PASV_MIN_PORT=21100
       - PASV_MAX_PORT=21110
     ports:
-      - "21:21"
+      - "8003:21"
       - "21100-21110:21100-21110"
     volumes:
       - ~/ftpdata:/home/vsftpd
+    networks:
+      - icubetrain-network
 
   icubetrain:
+    container_name: icubetrain
     image: icubetrain
     build:
       context: .
       dockerfile: src/iCubeTrain/Dockerfile
     ports:
-      - 8000:80
+      - 8001:80
     depends_on:
-      - mssql
+      - mssqldb
     environment:
-      - ConnectionStrings__DefaultConnection=Server=localhost,1433;Database=iCubeTrainDb;User Id=sa;Password=user1@password1;TrustServerCertificate=True;
+      - ConnectionStrings__DefaultConnection=Server=mssqldb;Database=iCubeTrainDb;User Id=sa;Password=user1@password1;TrustServerCertificate=True;
+    networks:
+      - icubetrain-network

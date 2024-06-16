@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using iCubeTrain.Data;
 
@@ -11,9 +12,11 @@ using iCubeTrain.Data;
 namespace iCubeTrain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240613021817_UpdateDb")]
+    partial class UpdateDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace iCubeTrain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1f618807-522f-40b2-ad81-2c2f5c43d976",
+                            Id = "25b732c7-4528-423f-ab74-2d8032067606",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e0e3c4a2-7e50-4310-913e-4437021395d9",
+                            Id = "a34adda0-b181-48fe-a510-1d4403cca92e",
                             Name = "User",
                             NormalizedName = "USER"
                         });
