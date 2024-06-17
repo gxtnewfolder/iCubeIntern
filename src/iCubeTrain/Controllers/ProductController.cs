@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using iCubeTrain.Models;
 using iCubeTrain.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iCubeTrain.Controllers
 {
     [Route("api/products")] // localhost:xxxx/api/Product
     [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;

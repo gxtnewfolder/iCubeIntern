@@ -97,6 +97,19 @@
             "netCore": {
                 "appProject": "${workspaceFolder}/src/iCubeTrain/iCubeTrain.csproj"
             }
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build",
+            "platform": "node",
+            "dockerBuild": {
+                "dockerfile": "${workspaceFolder}/frontend/iCubeTrain-app/Dockerfile",
+                "context": "${workspaceFolder}/frontend/iCubeTrain-app",
+                "pull": true
+            },
+            "node": {
+                "package": "${workspaceFolder}/frontend/iCubeTrain-app/package.json"
+            }
         }
     ]
 }

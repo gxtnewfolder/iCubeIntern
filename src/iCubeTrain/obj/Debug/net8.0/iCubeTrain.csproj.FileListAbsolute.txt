@@ -315,3 +315,7 @@ D:/work/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/Microsoft.Extensions.Options
 /Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/obj/Debug/net8.0/iCubeTrain.pdb
 /Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/obj/Debug/net8.0/iCubeTrain.genruntimeconfig.cache
 /Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/obj/Debug/net8.0/ref/iCubeTrain.dll
+/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/FluentFTP.dll
+/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/Renci.SshNet.dll
+/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/Microsoft.AspNetCore.OpenApi.dll
