@@ -1,11 +1,37 @@
 # Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
 
-version: '3.4'
+version: '3.8'
 
 networks:
   icubetrain-network:
 
 services:
+  frontend:
+    build:
+      context: ./frontend/iCubeTrain-app
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend/iCubeTrain-app:/app
+    depends_on:
+      - icubetrain
+    networks:
+      - icubetrain-network
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    ports:
+      - 8000:8080
+    depends_on:
+      - icubetrain
+    environment:
+      - SWAGGER_JSON=/swagger/v1/swagger.json
+    volumes:
+      - ./swagger/v1/swagger.json:/swagger/v1/swagger.json
+    networks:
+      - icubetrain-network
+
   mssqldb:
     container_name: mssql
     image: mcr.microsoft.com/mssql/server
@@ -24,11 +50,8 @@ services:
       - FTP_USER=user1
       - FTP_PASS=user1
       - PASV_ADDRESS=127.0.0.1
-      - PASV_MIN_PORT=21100
-      - PASV_MAX_PORT=21110
     ports:
       - "8003:21"
-      - "21100-21110:21100-21110"
     volumes:
       - ~/ftpdata:/home/vsftpd
     networks:
