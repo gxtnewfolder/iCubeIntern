@@ -1,0 +1,76 @@
+<div class="p-6">
+  <div class="flex items-center justify-between">
+    <div class="w-12 h-12"></div>
+    <div class="flex items-center text-gray-500">
+      <p class="text-lg font-semibold">ChatGPT</p>
+    </div>
+    <fa-icon mat-dialog-close class="text-2xl" [icon]="faTimes"></fa-icon>
+  </div>
+
+  <!-- Input tags and date -->
+  <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="col-span-1">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+          <fa-icon [icon]="faTags"></fa-icon>
+        </span>
+        <input type="text" class="pl-10 pr-4 py-2 border rounded-md w-full" [(ngModel)]="selectedTags"
+          placeholder="Tags">
+      </div>
+    </div>
+    <div class="col-span-1">
+      <div class="relative flex items-center">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+          <fa-icon [icon]="faCalendar"></fa-icon>
+        </span>
+        <input type="text" class="pl-10 pr-4 py-2 border rounded-md w-full" [(ngModel)]="startTime" placeholder="Start Time">
+      </div>
+      <p class="text-gray-500 text-sm mt-1">* Start Time</p>
+    </div>
+    
+    <div class="col-span-1">
+      <div class="relative flex items-center">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+          <fa-icon [icon]="faCalendar"></fa-icon>
+        </span>
+        <input type="text" class="pl-10 pr-4 py-2 border rounded-md w-full" [(ngModel)]="endTime" placeholder="End Time">
+      </div>
+      <p class="text-gray-500 text-sm mt-1">* End Time</p>
+    </div>
+  </div>
+</div>
+
+<mat-dialog-content class="p-6">
+  <ng-template #ChatData>
+    <div class="flex flex-col">
+      <div *ngFor="let chat of chatData" class="p-4 max-w-3/4"
+        [ngClass]="{ 'self-end': chat.id == 0, 'self-start': chat.id == 1 }">
+        <div class="flex gap-3" [ngClass]="{ 'justify-end': chat.id == 0 }">
+          <div *ngIf="chat.id == 0; else botMessage" class="message user">
+            {{chat.message}}
+          </div>
+          <ng-template #botMessage>
+            <div class="flex items-start">
+              <img class="w-8 h-8" src="https://img.icons8.com/ios/50/chatgpt.png" alt="chatgpt" />
+              <div class="message bot">
+                {{chat.message}}
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions class="flex justify-center p-6">
+  <div class="flex items-center gap-2 w-full">
+    <mat-icon class="w-8 h-8">attach_file</mat-icon>
+    <textarea #chatInput class="w-full p-2 border rounded-md resize-none" rows="1" placeholder="Message ChatGPT"
+      (input)="autoGrowInput(chatInput)" [(ngModel)]="userMessage"></textarea>
+    <button (click)="sendMessage(chatInput.value)" class="btn btn-primary rounded-full p-2" [disabled]="!chatInput.value"
+      [ngStyle]="{ 'background-color': chatInput.value ? '#007bff' : '#c7c7c7' }">
+      <fa-icon [icon]="faArrowUpLong"></fa-icon>
+    </button>
+  </div>
+</mat-dialog-actions>
