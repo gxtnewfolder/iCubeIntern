@@ -10,14 +10,14 @@ export class ChatGptService {
 
   constructor(private http: HttpClient) { }
 
-  analyzeStatus(prompt: string, tags: string, startTime: string, endTime: string): Observable<any> {
+  analyzeStatus(prompt: string, tags: string, startTime: string, endTime: string, model: string): Observable<any> {
     if (!prompt) {
       throw new Error('The prompt field is required.');
     }
 
-    const url = `${this.apiUrl}?tagName=${tags}&startTime=${startTime}&endTime=${endTime}`;
+    const url = `${this.apiUrl}?tagName=${tags}&startTime=${startTime}&endTime=${endTime}&prompt=${prompt}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.post<any>(url, prompt, { headers, responseType: 'text' as 'json' });
+    return this.http.post<any>(url, { prompt }, { headers, responseType: 'text' as 'json' });
   }
 }

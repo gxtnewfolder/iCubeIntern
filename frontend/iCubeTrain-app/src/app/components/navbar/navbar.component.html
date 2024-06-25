@@ -7,7 +7,7 @@
             <a mat-button routerLink="/products">Products</a>
         </div>
         <div class="flex gap-5">
-            <a mat-button (click)="openDialog()" routerLink="/chat-gpt">ChatGPT</a>
+            <a mat-button (click)="openDialog()">ChatGPT</a>
         </div>
         @if(isLoggedIn()){
         <div *ngIf="authService.getUserDetails() as UserDetails">

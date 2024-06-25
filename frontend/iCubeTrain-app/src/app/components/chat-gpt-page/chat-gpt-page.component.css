@@ -1,15 +1,40 @@
-.chat-gpt-page {
-    max-width: 600px;
-    margin: auto;
-    border: 1px solid #ccc;
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
 }
 
-.form-group {
-    margin-bottom: 1em;
+.user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
 }
 
-.form-group textarea {
-    display: block;
-    margin-bottom: 0.5em;
-    border: #ccc 1px solid;
+.bot {
+  background-color: #f0f0f0;
+  color: black;
+  align-self: flex-start;
+}
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.loader {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

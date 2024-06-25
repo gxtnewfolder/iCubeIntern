@@ -16,6 +16,7 @@ import {
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-chat-gpt-page',
@@ -30,6 +31,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatDialogModule,
     MatIconModule,
     FontAwesomeModule,
+    MatChipsModule
   ],
   templateUrl: './chat-gpt-page.component.html',
   styleUrls: ['./chat-gpt-page.component.css'],
@@ -41,38 +43,45 @@ export class ChatGptPageComponent {
   faTimes = faTimes;
   faChevronDown = faChevronDown;
 
-  selectedTags: string = 'B15-Status';
-  startTime: string = '*-1m';
+  selectedTags: string = 'TC-MAP-MULTI-240-A,TC-MAP-MULTI-240-B';
+  startTime: string = '*-1mo';
   endTime: string = '*';
-  userMessage: string = '"Hello"';
-  chatData: any[] = [];
+  userMessage: string = 'Analyze the following data of each tagId and provide a summary and tell me how much data you analyze.';
+  chatData: { id: number, message: string }[] = [];
+  isLoading: boolean = false;
+  tokenCount: number = 0;
+  showModelDropdown: boolean = false;
+  selectedModel: string = 'gpt-3.5-turbo';
 
   constructor(private chatGptService: ChatGptService) {}
 
-  sendMessage(prompt: string | null = null, textArea?: { value: string }) {
-    // Log the inputs to the console
-    console.log('Selected Tags:', this.selectedTags);
-    console.log('Start Time:', this.startTime);
-    console.log('End Time:', this.endTime);
-    console.log('User Message:', prompt);
+  sendMessage(message: string | null = null, textArea?: HTMLTextAreaElement) {
+    console.log('User Message:', message);
 
-    if (!prompt) {
-      console.error('The prompt field is required.');
+    if (!message) {
+      console.error('The message field is required.');
       return;
     }
 
-    this.chatGptService
-      .analyzeStatus(prompt, this.selectedTags, this.startTime, this.endTime)
+    this.chatData.push({ id: 0, message });
+    this.isLoading = true;
+
+    this.chatGptService.analyzeStatus(message, this.selectedTags, this.startTime, this.endTime, this.selectedModel)
       .subscribe(
         (response) => {
-          console.log('Response:', response); // Check response here
-          this.chatData.push({ id: 1, message: response });
+          console.log('Response:', response);
+          this.chatData.push({ id: 1, message: response.replace(/\n/g, '<br>') });
+          this.isLoading = false;
+
+          this.userMessage = '';
           if (textArea) {
             textArea.value = '';
+            this.autoGrowInput(textArea);
           }
         },
         (error) => {
           console.error('Error:', error);
+          this.isLoading = false;
         }
       );
   }
@@ -80,5 +89,23 @@ export class ChatGptPageComponent {
   autoGrowInput(textArea: HTMLElement) {
     textArea.style.height = 'auto';
     textArea.style.height = textArea.scrollHeight + 'px';
+  }
+
+  updateTokenCount(message: string) {
+    this.tokenCount = this.countTokens(message);
+  }
+
+  countTokens(message: string): number {
+    return message.split(/\s+/).filter(word => word.length > 0).length;
+  }
+
+  toggleModelDropdown() {
+    this.showModelDropdown = !this.showModelDropdown;
+  }
+
+  selectModel(model: string) {
+    this.selectedModel = model;
+    this.showModelDropdown = false;
+    console.log('Selected Model:', this.selectedModel);
   }
 }
