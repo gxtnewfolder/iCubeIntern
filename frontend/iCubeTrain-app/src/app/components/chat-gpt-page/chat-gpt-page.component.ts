@@ -31,7 +31,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatDialogModule,
     MatIconModule,
     FontAwesomeModule,
-    MatChipsModule
+    MatChipsModule,
   ],
   templateUrl: './chat-gpt-page.component.html',
   styleUrls: ['./chat-gpt-page.component.css'],
@@ -43,7 +43,14 @@ export class ChatGptPageComponent {
   faTimes = faTimes;
   faChevronDown = faChevronDown;
 
-  selectedTags: string = 'TC-MAP-MULTI-240-A,TC-MAP-MULTI-240-B';
+  selectedTags: string[] = ['TC-MAP-MULTI-240-A','TC-MAP-MULTI-240-B']; // Array for multiple selections
+  tagsOptions: { label: string, value: string }[] = [
+    { label: 'TC-MAP-MULTI-240-A', value: 'TC-MAP-MULTI-240-A' },
+    { label: 'TC-MAP-MULTI-240-B', value: 'TC-MAP-MULTI-240-B' },
+    { label: 'TC-MAP-MULTI-240-C', value: 'TC-MAP-MULTI-240-C' },
+    { label: 'TC-MAP-MULTI-241-D', value: 'TC-MAP-MULTI-241-D' },
+  ];
+
   startTime: string = '*-1mo';
   endTime: string = '*';
   userMessage: string = 'Analyze the following data of each tagId and provide a summary and tell me how much data you analyze.';
@@ -56,6 +63,7 @@ export class ChatGptPageComponent {
   constructor(private chatGptService: ChatGptService) {}
 
   sendMessage(message: string | null = null, textArea?: HTMLTextAreaElement) {
+    const tagsString = this.selectedTags.join(',');
     console.log('User Message:', message);
 
     if (!message) {
@@ -66,7 +74,7 @@ export class ChatGptPageComponent {
     this.chatData.push({ id: 0, message });
     this.isLoading = true;
 
-    this.chatGptService.analyzeStatus(message, this.selectedTags, this.startTime, this.endTime, this.selectedModel)
+    this.chatGptService.analyzeStatus(message, tagsString, this.startTime, this.endTime, this.selectedModel)
       .subscribe(
         (response) => {
           console.log('Response:', response);
@@ -89,6 +97,8 @@ export class ChatGptPageComponent {
   autoGrowInput(textArea: HTMLElement) {
     textArea.style.height = 'auto';
     textArea.style.height = textArea.scrollHeight + 'px';
+    // Add Max Height
+    textArea.style.maxHeight = '84px';
   }
 
   updateTokenCount(message: string) {

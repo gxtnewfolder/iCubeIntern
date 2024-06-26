@@ -6,6 +6,30 @@
   word-wrap: break-word;
 }
 
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container {
+  max-height: 28px;
+  overflow-x: hidden;
+  overflow-y: visible;
+  width: 100%;
+}
+
+::ng-deep .ng-select .ng-select-container {
+  min-height: auto;
+  border: none;
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  background-color: #8dbcee;
+  color: white;
+  padding: 0 5px;
+  margin: 0.25 5px;
+  border-radius: 8px;
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-input {
+  padding: 2px 0;
+}
+
 .user {
   background-color: #007bff;
   color: white;

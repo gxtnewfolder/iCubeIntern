@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
+// PrimeNG modules
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
 import {
   faChevronDown,
   faTags,
@@ -48,6 +51,8 @@ export const routes: Routes = [
     FormsModule,
     CommonModule,
     FontAwesomeModule,
+    DropdownModule,
+    ButtonModule,
   ],
   exports: [RouterModule],
 })
