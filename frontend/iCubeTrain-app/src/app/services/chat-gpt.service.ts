@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ChatGptService {
   private apiUrl = 'http://localhost:5032/api/multitag/analyze';
+  
 
   constructor(private http: HttpClient) { }
 
@@ -18,6 +19,6 @@ export class ChatGptService {
     const url = `${this.apiUrl}?tagName=${tags}&startTime=${startTime}&endTime=${endTime}&prompt=${prompt}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.post<any>(url, { prompt }, { headers, responseType: 'text' as 'json' });
+    return this.http.post<any>(url, { prompt }, { headers, responseType: 'json' });
   }
 }

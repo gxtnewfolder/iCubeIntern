@@ -48,7 +48,7 @@ export class NavbarComponent {
   openDialog() {
     const dialogRef = this.dialog.open(ChatGptPageComponent, {
       height: '700px',
-      width: '800px',
+      width: '840px',
       maxWidth: '80vw',
       maxHeight: '800px',
       disableClose: true,

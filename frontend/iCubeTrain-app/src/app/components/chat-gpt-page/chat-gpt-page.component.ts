@@ -43,8 +43,8 @@ export class ChatGptPageComponent {
   faTimes = faTimes;
   faChevronDown = faChevronDown;
 
-  selectedTags: string[] = ['TC-MAP-MULTI-240-A','TC-MAP-MULTI-240-B']; // Array for multiple selections
-  tagsOptions: { label: string, value: string }[] = [
+  selectedTags: string[] = ['TC-MAP-MULTI-240-A', 'TC-MAP-MULTI-240-B']; // Array for multiple selections
+  tagsOptions: { label: string; value: string }[] = [
     { label: 'TC-MAP-MULTI-240-A', value: 'TC-MAP-MULTI-240-A' },
     { label: 'TC-MAP-MULTI-240-B', value: 'TC-MAP-MULTI-240-B' },
     { label: 'TC-MAP-MULTI-240-C', value: 'TC-MAP-MULTI-240-C' },
@@ -53,10 +53,12 @@ export class ChatGptPageComponent {
 
   startTime: string = '*-1mo';
   endTime: string = '*';
-  userMessage: string = 'Analyze the following data of each tagId and provide a summary and tell me how much data you analyze.';
-  chatData: { id: number, message: string }[] = [];
+  userMessage: string =
+    'Analyze the following data of each tagId and provide a summary and tell me how much data you analyze.';
+  chatData: { id: number; message: string }[] = [];
   isLoading: boolean = false;
-  tokenCount: number = 0;
+  tokenCountInput: number = 0;
+  tokenCountAnalysisSummary: number = 0;
   showModelDropdown: boolean = false;
   selectedModel: string = 'gpt-3.5-turbo';
 
@@ -74,11 +76,42 @@ export class ChatGptPageComponent {
     this.chatData.push({ id: 0, message });
     this.isLoading = true;
 
-    this.chatGptService.analyzeStatus(message, tagsString, this.startTime, this.endTime, this.selectedModel)
+    this.chatGptService
+      .analyzeStatus(
+        message,
+        tagsString,
+        this.startTime,
+        this.endTime,
+        this.selectedModel
+      )
       .subscribe(
         (response) => {
-          console.log('Response:', response);
-          this.chatData.push({ id: 1, message: response.replace(/\n/g, '<br>') });
+          console.log('Response:', response.analysisSummary);
+          console.log('Token Count Input:', response.tokenCountInput);
+          console.log(
+            'Token Count Analysis Summary:',
+            response.tokenCountAnalysisSummary
+          )
+          // Check if response and analysisSummary exist
+          if (response && response.analysisSummary) {
+            // Display the analysis summary with line breaks
+            const formattedAnalysisSummary = response.analysisSummary.replace(
+              /\n/g,
+              '<br>'
+            );
+            this.chatData.push({ id: 1, message: formattedAnalysisSummary });
+          } else {
+            console.error('Invalid response format:', response);
+            // Handle invalid response format gracefully
+          }
+
+          // Update token counts if they exist
+          this.tokenCountInput =
+            response && response.tokenCountInput ? response.tokenCountInput : 0;
+          this.tokenCountAnalysisSummary =
+            response && response.tokenCountAnalysisSummary
+              ? response.tokenCountAnalysisSummary
+              : 0;
           this.isLoading = false;
 
           this.userMessage = '';
@@ -102,11 +135,11 @@ export class ChatGptPageComponent {
   }
 
   updateTokenCount(message: string) {
-    this.tokenCount = this.countTokens(message);
+    this.tokenCountInput = this.countTokens(message);
   }
 
   countTokens(message: string): number {
-    return message.split(/\s+/).filter(word => word.length > 0).length;
+    return message.split(/\s+/).filter((word) => word.length > 0).length;
   }
 
   toggleModelDropdown() {

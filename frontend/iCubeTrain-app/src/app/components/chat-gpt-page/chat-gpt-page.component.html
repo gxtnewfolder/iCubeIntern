@@ -7,7 +7,7 @@
       <div *ngIf="showModelDropdown" class="absolute top-6 mt-2 w-48 bg-white border rounded shadow-lg z-50 ">
         <button class="w-full text-left px-4 py-2 hover:bg-gray-100"
           (click)="selectModel('gpt-3.5-turbo')">gpt-3.5-turbo</button>
-        <button class="w-full text-left px-4 py-2 hover:bg-gray-100" (click)="selectModel('gpt-4o')">gpt-4o</button>
+        <button class="w-full text-left px-4 py-2 hover:bg-gray-100" (click)="selectModel('gpt-4')">gpt-4</button>
       </div>
     </div>
     <fa-icon mat-dialog-close class="text-2xl" [icon]="faTimes"></fa-icon>
@@ -20,39 +20,31 @@
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
           <fa-icon [icon]="faTags"></fa-icon>
         </span>
-        <ng-select
-          class="custom-select pl-8 pr-2 py-2 border rounded-md w-full"
-          [(ngModel)]="selectedTags"
-          [items]="tagsOptions"
-          bindLabel="label"
-          bindValue="value"
-          placeholder="Select Tags"
-          [multiple]="true"
-          [searchable]="true"
-          [clearable]="false"
-          [virtualScroll]="true"
-          [closeOnSelect]="false"
-          >
+        <ng-select class="custom-select pl-8 pr-2 py-2 border rounded-md w-full" [(ngModel)]="selectedTags"
+          [items]="tagsOptions" bindLabel="label" bindValue="value" placeholder="Select Tags" [multiple]="true"
+          [searchable]="true" [clearable]="false" [virtualScroll]="true" [closeOnSelect]="false">
         </ng-select>
       </div>
     </div>
-  
+
     <div class="col-span-1 flex flex-col relative">
       <div class="relative">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
           <fa-icon [icon]="faCalendar"></fa-icon>
         </span>
-        <input type="text" class="custom-input pl-10 pr-4 py-2 border rounded-md w-full" [(ngModel)]="startTime" placeholder="Start Time">
+        <input type="text" class="custom-input pl-10 pr-4 py-2 border rounded-md w-full" [(ngModel)]="startTime"
+          placeholder="Start Time">
       </div>
       <p class="text-gray-500 text-sm mt-1">* Start Time</p>
     </div>
-  
+
     <div class="col-span-1 flex flex-col relative">
       <div class="relative">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
           <fa-icon [icon]="faCalendar"></fa-icon>
         </span>
-        <input type="text" class="custom-input pl-10 pr-4 py-2 border rounded-md w-full" [(ngModel)]="endTime" placeholder="End Time">
+        <input type="text" class="custom-input pl-10 pr-4 py-2 border rounded-md w-full" [(ngModel)]="endTime"
+          placeholder="End Time">
       </div>
       <p class="text-gray-500 text-sm mt-1">* End Time</p>
     </div>
@@ -87,7 +79,8 @@
       <fa-icon [icon]="faArrowUpLong"></fa-icon>
     </button>
   </div>
-  <div class="text-gray-500 text-sm mt-2 mx-auto">
-    Token count: {{ tokenCount }}
+  <div class="text-gray-500 text-sm mt-2 mx-auto flex items-center gap-2">
+    <div>Token Input: {{ tokenCountInput }} |</div>
+    <div>Token Output: {{ tokenCountAnalysisSummary }}</div>
   </div>
 </mat-dialog-actions>

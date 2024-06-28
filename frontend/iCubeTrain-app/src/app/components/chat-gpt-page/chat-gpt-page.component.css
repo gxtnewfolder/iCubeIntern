@@ -30,6 +30,12 @@
   padding: 2px 0;
 }
 
+::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-placeholder {
+  top: 0;
+  padding-bottom: 0;
+  padding-top: 2px;
+}
+
 .user {
   background-color: #007bff;
   color: white;
