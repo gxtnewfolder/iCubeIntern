@@ -1,16 +1,25 @@
-.message {
+.message.user {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 8px;
-  max-width: 80%;
+  max-width: 60%;
+  word-wrap: break-word;
+}
+
+.message.bot {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  max-width: 70%;
   word-wrap: break-word;
 }
 
 ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container {
   max-height: 28px;
-  overflow-x: hidden;
-  overflow-y: visible;
+  /* overflow-x: hidden;
+  overflow-y: visible; */
   width: 100%;
+  flex-wrap: nowrap !important;
 }
 
 ::ng-deep .ng-select .ng-select-container {
@@ -19,16 +28,19 @@
 }
 
 ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
-  background-color: #8dbcee;
+  background-color: #007bff;
   color: white;
   padding: 0 5px;
-  margin: 0.25 5px;
   border-radius: 8px;
 }
 
-::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-input {
-  padding: 2px 0;
+::ng-deep .ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container{
+  box-shadow: none;
 }
+
+/* ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-input {
+  padding: 2px 0;
+} */
 
 ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-placeholder {
   top: 0;
@@ -50,7 +62,7 @@
 
 .loading-indicator {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   padding: 10px;
 }
@@ -67,4 +79,22 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+::ng-deep .mat-mdc-dialog-surface{
+  border-top-left-radius: 15px;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 0;
+  border-left: solid 1px rgba(73, 73, 73, 0.1);
+  justify-content: space-evenly;
+}
+
+::ng-deep .cdk-overlay-backdrop {
+  position: relative;
+}
+
+::ng-deep .mat-mdc-dialog-inner-container { 
+  transform: translateX(-50%);
+  transition: transform 0.3s ease-out;
 }
