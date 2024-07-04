@@ -10,9 +10,15 @@ import { ChatGptPageComponent } from '../chat-gpt-page/chat-gpt-page.component';
   imports: [RouterLink, MatDialogModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
+  host: { class: 'w-full' },
 })
 export class HomeComponent {
   authService = inject(AuthService);
+  isChatVisible = false;
+
+  toggleChat() {
+    this.isChatVisible = !this.isChatVisible;
+  }
 
   constructor(private dialog: MatDialog) { }
 
@@ -20,17 +26,14 @@ export class HomeComponent {
   }
 
   openDialog() {
-    
-    const viewportWidth = window.innerWidth;
-    const dialogWidth = Math.min(viewportWidth * 0.4, 500);
 
     const dialogRef = this.dialog.open(ChatGptPageComponent, {
-      height: '100%',
-      width: `${dialogWidth}px`,
+      width: '30%',
+      height: '100vh',
       maxWidth: '80vw',
-      // maxHeight: '800px',
+      position: { right: '-452px', bottom: '0' },
+      panelClass: 'custom-dialog',
       disableClose: false,
-      position: { right: '-250px', bottom: '0px' },
     });
   
     dialogRef.afterClosed().subscribe((result) => {

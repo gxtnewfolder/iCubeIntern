@@ -1,99 +1,100 @@
-<div class="p-4" @dialogAnimation>
-  <div class="flex items-center justify-between">
-    <div class="relative flex items-center text-gray-500 border-2 rounded-xl p-1 px-2 hover:bg-gray-200" (click)="clearChat()">Clear</div>
-    <div class="relative flex items-center text-gray-500">
-      <p class="text-lg font-semibold">Open AI | {{ sharedData.selectedModel }}</p>
-      <fa-icon class="ml-2 cursor-pointer" [icon]="faChevronDown" (click)="toggleModelDropdown()"></fa-icon>
-      <div *ngIf="sharedData.showModelDropdown" class="absolute top-6 mt-2 w-48 bg-white border rounded shadow-lg z-50 ">
-        <button class="w-full text-left px-4 py-2 hover:bg-gray-100"
-          (click)="selectModel('gpt-3.5-turbo')">gpt-3.5-turbo</button>
-        <button class="w-full text-left px-4 py-2 hover:bg-gray-100" (click)="selectModel('gpt-4o')">gpt-4o</button>
-      </div>
-    </div>
-    <fa-icon mat-dialog-close class="text-2xl mr-1" [icon]="faTimes"></fa-icon>
-  </div>
-
-  <!-- Input tags and date -->
-  <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
-    <div class="flex flex-col relative col-span-2">
-      <div class="relative">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 border-r border-solid pr-2 z-30">
-          <fa-icon [icon]="faTags"></fa-icon>
-        </span>
-        <ng-select class="custom-select pl-8 pr-2 py-1.5 border rounded-md w-full z-10" [(ngModel)]="sharedData.selectedTags"
-          [items]="tagsOptions" bindLabel="label" bindValue="value" placeholder="Select Tags" [multiple]="true"
-          [searchable]="true" [clearable]="false" [virtualScroll]="true" [closeOnSelect]="false"
-          >
-          <!-- Custom ng-value-label template -->
-          <!-- <ng-template ng-value-label let-item="item">
-            <span *ngIf="getSelectedTagsCount() > 2">{{ getSelectedTagsCount() }} tags selected</span>
-            <span *ngIf="getSelectedTagsCount() <= 2">{{ formatSelectedTags() }}</span>
-          </ng-template> -->
-
-          <!-- Default ng-option template -->
-          <ng-template ng-option-tmp let-item="item">
-            <fa-icon [icon]="faTags"></fa-icon> <!-- Font Awesome icon for each option -->
-            {{ item.label }}
-          </ng-template>
-        </ng-select>
-      </div>
-    </div>
-
-    <div class="col-span-1 flex flex-col relative">
-      <div class="relative">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 border-r border-solid pr-2">
-          <fa-icon [icon]="faCalendar"></fa-icon>
-        </span>
-        <input type="text" class="custom-input pl-12 pr-4 py-2 border rounded-md w-full z-20" [(ngModel)]="sharedData.startTime"
-          placeholder="Start Time">
-      </div>
-      <p class="text-gray-500 text-sm mt-1">* Start Time</p>
-    </div>
-
-    <div class="col-span-1 flex flex-col relative">
-      <div class="relative">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 border-r border-solid pr-2">
-          <fa-icon [icon]="faCalendar"></fa-icon>
-        </span>
-        <input type="text" class="custom-input pl-12 pr-4 py-2 border rounded-md w-full" [(ngModel)]="sharedData.endTime"
-          placeholder="End Time">
-      </div>
-      <p class="text-gray-500 text-sm mt-1">* End Time</p>
-    </div>
-  </div>
-</div>
-
-<!-- Chat Data -->
-<mat-dialog-content class="p-2 border rounded-md mx-4" style="background-color: rgb(234 234 234 / 10%);">
-  <div class="flex flex-col">
-    <div *ngFor="let chat of sharedData.chatData" class="p-1 max-w-3/4"
-      [ngClass]="{ 'self-end': chat.id == 0, 'self-start': chat.id == 1 }">
-      <div class="flex gap-3" [ngClass]="{ 'justify-end': chat.id == 0, 'justify-start': chat.id == 1 }">
-        <div *ngIf="chat.id == 0" class="message user">
-          {{ chat.message }}
+<div class="custom-chat flex flex-col h-full border-l rounded-l-lg bg-white z-0" #dialog>
+  <div class="resizable-handle" (mousedown)="onResizeHandleMouseDown($event)"></div>
+  <div class="p-4">
+    <div class="flex justify-between">
+      <fa-icon mat-dialog-close class="relative flex items-center text-gray-500 border-2 rounded-xl p-1 px-2 hover:bg-gray-200" [icon]="faRefresh" (click)="clearChat()"></fa-icon>
+      <div class="relative flex items-center text-gray-500">
+        <p class="text-lg font-semibold">Open AI | {{ sharedData.selectedModel }}</p>
+        <fa-icon class="ml-2 cursor-pointer" [icon]="faChevronDown" (click)="toggleModelDropdown()"></fa-icon>
+        <div *ngIf="sharedData.showModelDropdown"
+          class="absolute top-6 mt-2 w-48 bg-white border rounded shadow-lg z-50 ">
+          <button class="w-full text-left px-4 py-2 hover:bg-gray-100"
+            (click)="selectModel('gpt-3.5-turbo')">gpt-3.5-turbo</button>
+          <button class="w-full text-left px-4 py-2 hover:bg-gray-100" (click)="selectModel('gpt-4o')">gpt-4o</button>
         </div>
-        <div *ngIf="chat.id == 1" class="message bot" [innerHTML]="chat.message"></div>
+      </div>
+      <fa-icon mat-dialog-close class="text-2xl mr-1" [icon]="faTimes"></fa-icon>
+    </div>
+
+    <!-- Input tags and date -->
+    <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+      <div class="flex flex-col relative col-span-2">
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 border-r border-solid pr-2 z-30">
+            <fa-icon [icon]="faTags"></fa-icon>
+          </span>
+          <ng-select class="custom-select pl-8 pr-2 py-1.5 border rounded-md w-full z-10"
+            [(ngModel)]="sharedData.selectedTags" [items]="tagsOptions" bindLabel="label" bindValue="value"
+            placeholder="Select Tags" [multiple]="true" [searchable]="true" [clearable]="false" [virtualScroll]="true"
+            [closeOnSelect]="false">
+            <!-- Default ng-option template -->
+            <ng-template ng-option-tmp let-item="item">
+              <fa-icon [icon]="faTags"></fa-icon> <!-- Font Awesome icon for each option -->
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="col-span-1 flex flex-col relative">
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 border-r border-solid pr-2">
+            <fa-icon [icon]="faCalendar"></fa-icon>
+          </span>
+          <input type="text" class="custom-input pl-12 pr-4 py-2 border rounded-md w-full z-20"
+            [(ngModel)]="sharedData.startTime" placeholder="Start Time">
+        </div>
+        <p class="text-gray-500 text-sm mt-1">* Start Time</p>
+      </div>
+
+      <div class="col-span-1 flex flex-col relative">
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 border-r border-solid pr-2">
+            <fa-icon [icon]="faCalendar"></fa-icon>
+          </span>
+          <input type="text" class="custom-input pl-12 pr-4 py-2 border rounded-md w-full"
+            [(ngModel)]="sharedData.endTime" placeholder="End Time">
+        </div>
+        <p class="text-gray-500 text-sm mt-1">* End Time</p>
       </div>
     </div>
-    <div *ngIf="sharedData.isLoading" class="loading-indicator">
-      <div class="loader"></div> <!-- Replace this with your actual loading indicator -->
-    </div>
   </div>
-</mat-dialog-content>
 
-<mat-dialog-actions class="flex justify-center p-4">
-  <div class="flex items-center gap-2 w-full">
-    <mat-icon class="w-8 h-8">attach_file</mat-icon>
-    <textarea #chatInput class="w-full p-2 border rounded-md resize-none" rows="1" placeholder="Message ChatGPT"
-      (input)="updateTokenCount(chatInput.value); autoGrowInput(chatInput)" [(ngModel)]="sharedData.userMessage"></textarea>
-    <button (click)="sendMessage(sharedData.userMessage, chatInput)" class="btn btn-primary rounded-full p-2"
-      [disabled]="!sharedData.userMessage" [ngStyle]="{ 'background-color': sharedData.userMessage ? '#007bff' : '#c7c7c7' }">
-      <fa-icon [icon]="faArrowUpLong"></fa-icon>
-    </button>
-  </div>
-  <div class="text-gray-500 text-sm mt-3 mx-auto flex items-center gap-2">
-    <div>Token Input: {{ sharedData.tokenCountInput }} |</div>
-    <div>Token Output: {{ sharedData.tokenCountAnalysisSummary }} |</div>
-    <div>Remaining: {{ sharedData.tokenCountInput - sharedData.tokenCountAnalysisSummary }}</div>
-  </div>
-</mat-dialog-actions>
+  <!-- Chat Data -->
+  <mat-dialog-content class="p-2 border rounded-md mx-4"
+    style="background-color: rgb(234 234 234 / 10%); height: inherit;">
+    <div class="flex flex-col">
+      <div *ngFor="let chat of sharedData.chatData" class="p-1 max-w-3/4"
+        [ngClass]="{ 'self-end': chat.id == 0, 'self-start': chat.id == 1 }">
+        <div class="flex gap-3" [ngClass]="{ 'justify-end': chat.id == 0, 'justify-start': chat.id == 1 }">
+          <div *ngIf="chat.id == 0" class="message user">
+            {{ chat.message }}
+          </div>
+          <div *ngIf="chat.id == 1" class="message bot" [innerHTML]="chat.message"></div>
+        </div>
+      </div>
+      <div *ngIf="sharedData.isLoading" class="loading-indicator">
+        <div class="loader"></div> <!-- Replace this with your actual loading indicator -->
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="flex justify-center p-4 flex-col">
+    <div class="flex items-center gap-2 w-full">
+      <mat-icon class="w-8 h-8">attach_file</mat-icon>
+      <textarea #chatInput class="w-full p-2 border rounded-md resize-none text-sm" rows="1" placeholder="Message GPT"
+        (input)="updateTokenCount(chatInput.value); autoGrowInput(chatInput)"
+        [(ngModel)]="sharedData.userMessage"></textarea>
+      <button (click)="sendMessage(sharedData.userMessage, chatInput)" class="btn btn-primary rounded-full p-2"
+        [disabled]="!sharedData.userMessage"
+        [ngStyle]="{ 'background-color': sharedData.userMessage ? '#007bff' : '#c7c7c7' }">
+        <fa-icon [icon]="faArrowUpLong"></fa-icon>
+      </button>
+    </div>
+    <div class="text-gray-500 text-sm mt-3 mx-auto flex items-center gap-2">
+      <div>Token Input: {{ sharedData.tokenCountInput }} |</div>
+      <div>Token Output: {{ sharedData.tokenCountAnalysisSummary }} |</div>
+      <div>Remaining: {{ sharedData.tokenCountInput - sharedData.tokenCountAnalysisSummary }}</div>
+    </div>
+  </mat-dialog-actions>
+</div>

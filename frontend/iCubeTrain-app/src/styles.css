@@ -5,3 +5,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.app-container {
+    display: flex;
+    justify-content: start;
+    height: 93vh;
+}
+
+.main-content {
+    flex: 1;
+    background-color: #fff;
+}
+
+.chat {
+    width: 300px;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.chat-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.chat-input {
+    margin-top: 10px;
+}
+
+.chat-input textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+}

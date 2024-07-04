@@ -1,20 +1,17 @@
 <div class="flex items-center flex-col pt-56 h-full">
-  <!-- GPT Icon -->
-  <div class="hidden lg:flex fixed flex-col top-[50%] right-0">
-    <ul>
-      <li
-        class="w-12 flex justify-between items-center mr-[-25px] hover:mr-[-5px] duration-300">
-        <img src="https://seeklogo.com/images/C/chatgpt-logo-02AFA704B5-seeklogo.com.png" alt="GPT Icon"
-          (click)="openDialog()"
-          class="rounded-full hover:shadow-lg transition duration-300 ease-in-out cursor-pointer">
-      </li>
-    </ul>
-  </div>
   <div class="relative">
     <h1 class="text-4xl text-center font-bold">Welcome to
       <span class="text-5xl text-green-800">iCubeTrain</span>
     </h1>
-
+      <!-- <div class="hidden lg:flex fixed flex-col top-[50%] right-0">
+        <ul>
+          <li class="w-12 flex justify-between items-center mr-[-25px] hover:mr-[-5px] duration-300">
+            <img src="https://seeklogo.com/images/C/chatgpt-logo-02AFA704B5-seeklogo.com.png" alt="GPT Icon"
+              (click)="openDialog()"
+              class="rounded-full hover:shadow-lg transition duration-300 ease-in-out cursor-pointer">
+          </li>
+        </ul>
+      </div> -->
     <div class="flex flex-col items-center gap-5 justify-center my-4">
       @if(authService.getUserDetails()){
       <h1 class="text-2xl">

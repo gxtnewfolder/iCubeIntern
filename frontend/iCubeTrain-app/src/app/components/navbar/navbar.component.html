@@ -6,10 +6,10 @@
         <div class="flex gap-5">
             <a mat-button routerLink="/products">Products</a>
         </div>
-        <div class="flex gap-5">
+        <!-- <div class="flex gap-5">
             <img mat-button (click)="openDialog()" src="https://seeklogo.com/images/C/chatgpt-logo-02AFA704B5-seeklogo.com.png" class="w-8 rounded-full hover:shadow-lg transition duration-300 ease-in-out cursor-pointer"
                 alt="ChatGPT Logo">
-        </div>
+        </div> -->
         @if(isLoggedIn()){
         <div *ngIf="authService.getUserDetails() as UserDetails">
             <div class="flex gap-5 items-center">

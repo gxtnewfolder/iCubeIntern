@@ -1,0 +1,42 @@
+.custom-dialog .mat-dialog-container {
+    overflow: hidden;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+    width: 100%;
+    height: 100%;
+}
+
+.custom-dialog .mat-dialog-container.resizable {
+    resize: horizontal;
+    overflow: auto;
+}
+
+.custom-dialog.show .mat-dialog-container {
+    transform: translateX(0);
+}
+
+.fixed {
+    position: fixed;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.bottom-4 {
+    bottom: 1rem;
+}
+
+.right-4 {
+    right: 1rem;
+}
+
+.w-16 {
+    width: 4rem;
+}
+
+.h-16 {
+    height: 4rem;
+}

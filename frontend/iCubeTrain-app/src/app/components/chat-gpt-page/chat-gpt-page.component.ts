@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { ChatGptService } from '../../services/chat-gpt.service';
 import { SharedDataService } from '../../services/shared-data.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,10 +21,15 @@ import {
   faTags,
   faTimes,
   faChevronDown,
+  faRefresh,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatChipsModule } from '@angular/material/chips';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-chat-gpt-page',
@@ -39,12 +50,15 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   styleUrls: ['./chat-gpt-page.component.css'],
   animations: [
     trigger('dialogAnimation', [
-      state('void', style({
-        opacity: 0,
-        transform: 'translateX(100%)'
-      })),
-    ])
-  ]
+      state(
+        'void',
+        style({
+          opacity: 0,
+          transform: 'translateX(100%)',
+        })
+      ),
+    ]),
+  ],
 })
 export class ChatGptPageComponent {
   @ViewChild('dialog') dialogElement: ElementRef | undefined;
@@ -53,6 +67,7 @@ export class ChatGptPageComponent {
   faTags = faTags;
   faTimes = faTimes;
   faChevronDown = faChevronDown;
+  faRefresh = faRefresh;
 
   isResizing: boolean = false;
   lastDownX: number | undefined;
@@ -82,9 +97,12 @@ export class ChatGptPageComponent {
     private renderer: Renderer2
   ) {}
 
-  // ngOnInit() {
-  //   this.dialogWidth = 500;
-  // }
+  ngOnInit() {
+    this.dialogWidth = 200;
+    setTimeout(() => {
+      this.renderer.addClass(this.dialogElement?.nativeElement, 'show');
+    }, 0);
+  }
 
   sendMessage(message: string | null = null, textArea?: HTMLTextAreaElement) {
     const tagsString = this.sharedData.selectedTags.join(',');
@@ -122,7 +140,10 @@ export class ChatGptPageComponent {
               /\n/g,
               '<br>'
             );
-            this.sharedData.chatData.push({ id: 1, message: formattedAnalysisSummary });
+            this.sharedData.chatData.push({
+              id: 1,
+              message: formattedAnalysisSummary,
+            });
           } else {
             console.error('Invalid response format:', response);
             // Handle invalid response format gracefully
@@ -188,15 +209,19 @@ export class ChatGptPageComponent {
   onResizeHandleMouseDown(event: MouseEvent) {
     this.isResizing = true;
     this.lastDownX = event.clientX;
-    this.dialogWidth = this.dialogElement?.nativeElement?.offsetWidth ?? 0;
+    this.dialogWidth = this.dialogElement?.nativeElement.offsetWidth;
   }
 
   @HostListener('window:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
     if (!this.isResizing) return;
     const offsetRight = document.body.offsetWidth - event.clientX;
-    this.dialogWidth = Math.max(offsetRight, 200); // Set a minimum width
-    this.renderer.setStyle(this.dialogElement?.nativeElement, 'width', `${this.dialogWidth}px`);
+    this.dialogWidth = Math.max(offsetRight, 200);
+    this.renderer.setStyle(
+      this.dialogElement?.nativeElement,
+      'width',
+      `${this.dialogWidth}px`
+    );
   }
 
   @HostListener('window:mouseup')
