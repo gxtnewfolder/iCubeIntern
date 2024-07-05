@@ -1,14 +1,18 @@
 import { Component, HostListener, ElementRef, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faHome, faDatabase } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  faHome = faHome;
+  faDatabase = faDatabase;
   private resizing: boolean = false;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}

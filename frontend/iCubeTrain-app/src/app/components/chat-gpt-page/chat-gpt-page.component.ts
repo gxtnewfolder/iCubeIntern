@@ -96,6 +96,9 @@ export class ChatGptPageComponent {
     public sharedData: SharedDataService,
     private renderer: Renderer2
   ) {}
+  toggleChat() {
+    this.sharedData.toggleChat();
+  }
 
   ngOnInit() {
     this.dialogWidth = 200;

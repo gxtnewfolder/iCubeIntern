@@ -10,14 +10,15 @@ import { ChatGptPageComponent } from '../chat-gpt-page/chat-gpt-page.component';
   imports: [RouterLink, MatDialogModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  host: { class: 'w-full' },
+  host: { class: 'w-full h-[923px]' },
 })
 export class HomeComponent {
   authService = inject(AuthService);
-  isChatVisible = false;
+  isChatVisible: boolean = false;
 
   toggleChat() {
     this.isChatVisible = !this.isChatVisible;
+    console.log('chatVisible', this.isChatVisible);
   }
 
   constructor(private dialog: MatDialog) { }

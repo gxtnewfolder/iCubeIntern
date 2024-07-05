@@ -21,4 +21,10 @@ export class ChatGptService {
 
     return this.http.post<any>(url, { prompt }, { headers, responseType: 'json' });
   }
+
+  isChatVisible = false;
+
+  toggleChat() {
+    this.isChatVisible = !this.isChatVisible;
+  }
 }

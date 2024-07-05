@@ -1,6 +1,7 @@
-<div class="">
+
   <app-navbar></app-navbar>
-  <div class="hidden lg:flex fixed flex-col top-[50%] right-0">
+  <app-sidebar></app-sidebar>
+  <!-- <div class="hidden lg:flex fixed flex-col top-[50%] right-0">
     <ul>
       <li class="w-12 flex justify-between items-center mr-[-25px] hover:mr-[-5px] duration-300">
         <img src="https://seeklogo.com/images/C/chatgpt-logo-02AFA704B5-seeklogo.com.png" alt="GPT Icon"
@@ -8,14 +9,13 @@
           class="rounded-full hover:shadow-lg transition duration-300 ease-in-out cursor-pointer">
       </li>
     </ul>
-  </div>
+  </div> -->
   <div class="app-container">
-    <app-sidebar></app-sidebar>
     <router-outlet></router-outlet>
     <app-chat-gpt-page [ngClass]="{'hidden': !isChatVisible, 'block': isChatVisible}"
       class="w-[30%]"></app-chat-gpt-page>
   </div>
-</div>
+
 
 <!-- <app-navbar></app-navbar>
 <router-outlet></router-outlet> -->

@@ -8,7 +8,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ChatGptPageComponent } from '../chat-gpt-page/chat-gpt-page.component';
+import { SharedDataService } from '../../services/shared-data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -43,19 +43,24 @@ export class NavbarComponent {
     this.router.navigate(['/login']);
   }
 
-  readonly dialog = inject(MatDialog);
+  // readonly dialog = inject(MatDialog);
 
-  openDialog() {
-    const dialogRef = this.dialog.open(ChatGptPageComponent, {
-      height: '700px',
-      width: '840px',
-      maxWidth: '80vw',
-      maxHeight: '800px',
-      disableClose: true,
-    });
+  // openDialog() {
+  //   const dialogRef = this.dialog.open(ChatGptPageComponent, {
+  //     height: '700px',
+  //     width: '840px',
+  //     maxWidth: '80vw',
+  //     maxHeight: '800px',
+  //     disableClose: true,
+  //   });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  // }
+  constructor(private sharedData: SharedDataService ) {}
+
+  toggleChat() {
+    this.sharedData.toggleChat();
   }
 }

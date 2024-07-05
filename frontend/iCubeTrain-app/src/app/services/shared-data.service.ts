@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,4 +15,12 @@ export class SharedDataService {
   tokenCountAnalysisSummary: number = 0;
   showModelDropdown: boolean = false;
   selectedModel: string = 'gpt-3.5-turbo';
+
+  private chatVisible = new BehaviorSubject<boolean>(false);
+  chatVisible$ = this.chatVisible.asObservable();
+
+  toggleChat() {
+    this.chatVisible.next(!this.chatVisible.value);
+    // console.log('chatVisible', this.chatVisible.value);
+  }
 }

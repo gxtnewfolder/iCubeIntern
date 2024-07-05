@@ -1,8 +1,8 @@
-<div class="custom-chat flex flex-col h-full border-l rounded-l-lg bg-white z-0" #dialog>
-  <div class="resizable-handle" (mousedown)="onResizeHandleMouseDown($event)"></div>
+<div class="custom-chat flex flex-col h-full border-l rounded-l-lg bg-white" #dialog>
+  <!-- <div class="resizable-handle" (mousedown)="onResizeHandleMouseDown($event)"></div> -->
   <div class="p-4">
     <div class="flex justify-between">
-      <fa-icon mat-dialog-close class="relative flex items-center text-gray-500 border-2 rounded-xl p-1 px-2 hover:bg-gray-200" [icon]="faRefresh" (click)="clearChat()"></fa-icon>
+      <fa-icon mat-dialog-close class="relative flex items-center text-gray-500 border-2 rounded-xl p-1 px-2 hover:bg-blue-400" [icon]="faRefresh" (click)="clearChat()"></fa-icon>
       <div class="relative flex items-center text-gray-500">
         <p class="text-lg font-semibold">Open AI | {{ sharedData.selectedModel }}</p>
         <fa-icon class="ml-2 cursor-pointer" [icon]="faChevronDown" (click)="toggleModelDropdown()"></fa-icon>
@@ -13,7 +13,7 @@
           <button class="w-full text-left px-4 py-2 hover:bg-gray-100" (click)="selectModel('gpt-4o')">gpt-4o</button>
         </div>
       </div>
-      <fa-icon mat-dialog-close class="text-2xl mr-1" [icon]="faTimes"></fa-icon>
+      <fa-icon class="text-2xl mr-1" [icon]="faTimes" (click)="toggleChat()"></fa-icon>
     </div>
 
     <!-- Input tags and date -->
