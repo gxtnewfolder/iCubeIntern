@@ -10,7 +10,7 @@ import { ChatGptPageComponent } from '../chat-gpt-page/chat-gpt-page.component';
   imports: [RouterLink, MatDialogModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  host: { class: 'w-full h-[923px]' },
+  host: { class: 'w-full h-full' },
 })
 export class HomeComponent {
   authService = inject(AuthService);

@@ -101,10 +101,7 @@ export class ChatGptPageComponent {
   }
 
   ngOnInit() {
-    this.dialogWidth = 200;
-    setTimeout(() => {
-      this.renderer.addClass(this.dialogElement?.nativeElement, 'show');
-    }, 0);
+    
   }
 
   sendMessage(message: string | null = null, textArea?: HTMLTextAreaElement) {

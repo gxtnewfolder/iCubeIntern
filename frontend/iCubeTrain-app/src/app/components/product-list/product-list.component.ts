@@ -9,7 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [MatTableModule, MatButtonModule],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
+  host: { class: 'w-full h-full' },
 })
 export class ProductListComponent{
   productList:IProduct[] = [];

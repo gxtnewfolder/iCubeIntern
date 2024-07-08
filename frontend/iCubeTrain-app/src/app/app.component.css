@@ -9,3 +9,9 @@ app-chat-gpt-page.block {
     transform: translateX(0);
     transition: transform 0.3s ease-in-out;
 }
+
+.custom-chat {
+    max-width: 450px;
+    width: 100%;
+    min-width: 420px;
+}

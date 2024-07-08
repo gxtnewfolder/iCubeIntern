@@ -14,6 +14,12 @@
   word-wrap: break-word;
 }
 
+/* Ensure the chat messages are contained within the box and handle overflow */
+mat-dialog-content {
+  max-height: 65vh; /* Adjust this height as necessary */
+  overflow-y: auto;
+}
+
 ::ng-deep .ng-select.ng-select-multiple .ng-select-container .ng-value-container {
   max-height: 28px;
   /* overflow-x: hidden;
@@ -110,6 +116,7 @@
   max-width: 450px;
   width: 100%;
   min-width: 420px;
+  justify-content: space-between;
 }
 
 .resizable-handle {

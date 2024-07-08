@@ -21,6 +21,6 @@ export class SharedDataService {
 
   toggleChat() {
     this.chatVisible.next(!this.chatVisible.value);
-    // console.log('chatVisible', this.chatVisible.value);
+    console.log('chatVisible', this.chatVisible.value);
   }
 }
