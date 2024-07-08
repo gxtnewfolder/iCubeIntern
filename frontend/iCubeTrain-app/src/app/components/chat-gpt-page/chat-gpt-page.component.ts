@@ -228,4 +228,18 @@ export class ChatGptPageComponent {
   onMouseUp() {
     this.isResizing = false;
   }
+
+  @ViewChild('fileInput')
+  fileInput: any;
+
+  file: File | null = null;
+
+  onClickFileInputButton(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  onChangeFileInput(): void {
+    const files: { [key: string]: File } = this.fileInput.nativeElement.files;
+    this.file = files[0];
+  }
 }

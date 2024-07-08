@@ -1,8 +1,8 @@
-<div class="custom-chat flex flex-col h-full border-l rounded-l-lg bg-white" #dialog>  
+<div class="custom-chat flex flex-col h-full border-l rounded-l-2xl bg-white" #dialog>  
   <div class="resizable-handle" (mousedown)="onResizeHandleMouseDown($event)"></div>
   <div class="p-4">
     <div class="flex justify-between">
-      <fa-icon mat-dialog-close
+      <fa-icon
         class="relative flex items-center text-gray-500 border-2 rounded-xl p-1 px-2 hover:bg-blue-400" [icon]="faRefresh"
         (click)="clearChat()"></fa-icon>
       <div class="relative flex items-center text-gray-500">
@@ -82,8 +82,11 @@
   </mat-dialog-content>
 
   <mat-dialog-actions class="flex justify-center p-4 flex-col">
-    <div class="flex items-center gap-2 w-full">
-      <mat-icon class="w-8 h-8">attach_file</mat-icon>
+    <div class="flex items-center gap-1.5 w-full">
+      <input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()" />
+      <button *ngIf="sharedData.selectedModel === 'gpt-4o'" class="file-select-button rounded-full hover:shadow-lg cursor-pointer hover:bg-gray-100 flex p-1" (click)="onClickFileInputButton()">
+        <mat-icon class="w-8 h-8">attach_file</mat-icon>
+      </button>
       <textarea #chatInput class="w-full p-2 border rounded-md resize-none text-sm" rows="1" placeholder="Message GPT"
         (input)="updateTokenCount(chatInput.value); autoGrowInput(chatInput)"
         [(ngModel)]="sharedData.userMessage"></textarea>

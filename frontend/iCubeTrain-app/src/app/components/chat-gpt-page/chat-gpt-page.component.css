@@ -113,7 +113,7 @@ mat-dialog-content {
 }
 
 .custom-chat {
-  max-width: 450px;
+  max-width: 500px;
   width: 100%;
   min-width: 420px;
   justify-content: space-between;

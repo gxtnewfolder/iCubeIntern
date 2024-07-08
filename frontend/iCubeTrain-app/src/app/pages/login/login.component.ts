@@ -17,6 +17,7 @@ import { RouterLink, Router } from '@angular/router';
   imports: [MatInputModule, MatIconModule, ReactiveFormsModule, RouterLink, MatSnackBarModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
+  host: { class: 'w-full' },
 })
 export class LoginComponent implements OnInit{
   authService = inject(AuthService);
