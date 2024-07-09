@@ -7,7 +7,7 @@ namespace iCubeTrain.Models
 {
     public class TransformedData
     {
-        public Dictionary<string, List<TagValue>>? Data { get; set; }
+        public Dictionary<string, List<TagValue>> Data { get; set; }
     }
 
     public class TagValue

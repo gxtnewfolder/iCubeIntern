@@ -56,15 +56,19 @@ builder.Services.AddSingleton(provider =>
     var apiKey = configuration["OpenAi:ApiKey"];
     return new OpenAIService(provider.GetRequiredService<HttpClient>(), apiKey);
 });
+builder.Services.AddSingleton<IExternalAPIService, ExternalAPIService>();
+builder.Services.AddSingleton<TokenCountService>();
+
+builder.Services.AddSignalR();
 
 // Add services to the container.
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IMultiTagRepository, MultiTagRepository>();
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IFTPService, FTPService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
-// builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace iCubeTrain.Services
 {
-    public class OpenAIService : IOpenAIService
+    public class OpenAIService
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiKey;
