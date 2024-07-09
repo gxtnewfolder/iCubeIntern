@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cPaCLcz4+SU=",
+  "dgSpecHash": "xldjn8Cu37I=",
   "success": true,
   "projectFilePath": "/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/iCubeTrain.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "/Users/gxtnewfolder/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/fluentftp/50.0.1/fluentftp.50.0.1.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/gxtnewfolder/.nuget/packages/mapster/7.4.1-pre01/mapster.7.4.1-pre01.nupkg.sha512",
+    "/Users/gxtnewfolder/.nuget/packages/mapster.core/1.2.2-pre01/mapster.core.1.2.2-pre01.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/microsoft.aspnetcore.authentication.cookies/2.2.0/microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",

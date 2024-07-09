@@ -319,3 +319,4 @@ D:/work/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/Microsoft.Extensions.Options
 /Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/Renci.SshNet.dll
 /Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/Microsoft.AspNetCore.OpenApi.dll
+/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/bin/Debug/net8.0/Newtonsoft.Json.dll
