@@ -26,19 +26,19 @@ export class HomeComponent {
   ngOnInit(): void {
   }
 
-  openDialog() {
+  // openDialog() {
 
-    const dialogRef = this.dialog.open(ChatGptPageComponent, {
-      width: '30%',
-      height: '100vh',
-      maxWidth: '80vw',
-      position: { right: '-452px', bottom: '0' },
-      panelClass: 'custom-dialog',
-      disableClose: false,
-    });
+    // const dialogRef = this.dialog.open(ChatGptPageComponent, {
+    //   width: '30%',
+    //   height: '100vh',
+    //   maxWidth: '80vw',
+    //   position: { right: '-452px', bottom: '0' },
+    //   panelClass: 'custom-dialog',
+    //   disableClose: false,
+    // });
   
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  // }
 }

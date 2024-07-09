@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SharedDataService } from '../../services/shared-data.service';
+import { ChatGptPageComponent } from '../chat-gpt-page/chat-gpt-page.component'
 
 @Component({
   selector: 'app-navbar',
@@ -43,21 +44,21 @@ export class NavbarComponent {
     this.router.navigate(['/login']);
   }
 
-  // readonly dialog = inject(MatDialog);
+  readonly dialog = inject(MatDialog);
 
-  // openDialog() {
-  //   const dialogRef = this.dialog.open(ChatGptPageComponent, {
-  //     height: '700px',
-  //     width: '840px',
-  //     maxWidth: '80vw',
-  //     maxHeight: '800px',
-  //     disableClose: true,
-  //   });
+  openDialog() {
+    const dialogRef = this.dialog.open(ChatGptPageComponent, {
+      width: '30%',
+      height: '100vh',
+      maxWidth: '80vw',
+      position: { right: '0', bottom: '0' },
+      disableClose: false,
+    });
 
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     console.log(`Dialog result: ${result}`);
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   constructor(private sharedData: SharedDataService ) {}
 
   toggleChat() {

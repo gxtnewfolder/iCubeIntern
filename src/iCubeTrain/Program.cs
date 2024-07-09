@@ -49,6 +49,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddHttpClient<IOpenAIService, OpenAIService>();
+
 // Add services to the container.
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -56,6 +58,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IFTPService, FTPService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

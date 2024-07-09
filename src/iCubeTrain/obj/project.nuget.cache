@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "d3M1EjgvOPI=",
+  "dgSpecHash": "cPaCLcz4+SU=",
   "success": true,
   "projectFilePath": "/Users/gxtnewfolder/Documents/GitHub/iCubeIntern/src/iCubeTrain/iCubeTrain.csproj",
   "expectedPackageFiles": [
@@ -73,6 +73,7 @@
     "/Users/gxtnewfolder/.nuget/packages/microsoft.win32.registry/4.5.0/microsoft.win32.registry.4.5.0.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/Users/gxtnewfolder/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/ssh.net/2024.0.0/ssh.net.2024.0.0.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "/Users/gxtnewfolder/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",

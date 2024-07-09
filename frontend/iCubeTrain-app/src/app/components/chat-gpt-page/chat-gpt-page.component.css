@@ -108,7 +108,7 @@ mat-dialog-content {
 }
 
 ::ng-deep .mat-mdc-dialog-inner-container {
-  transform: translateX(-100%);
+  transform: translateX(0);
   transition: transform 0.3s ease-out !important;
 }
 
@@ -125,4 +125,9 @@ mat-dialog-content {
   position: absolute;
   top: 0;
   bottom: 0;
+}
+
+::ng-deep .mat-mdc-dialog-container-with-actions .mat-mdc-dialog-content {
+  padding: 0;
+  margin: 16px;
 }
