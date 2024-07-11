@@ -12,8 +12,8 @@ using iCubeTrain.Data;
 namespace iCubeTrain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240613025607_UpdateDb1")]
-    partial class UpdateDb1
+    [Migration("20240709085646_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace iCubeTrain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1f618807-522f-40b2-ad81-2c2f5c43d976",
+                            Id = "b6e6fc7e-b303-4e72-ba86-4b2ebe232952",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e0e3c4a2-7e50-4310-913e-4437021395d9",
+                            Id = "655f70fc-0138-4889-8350-f2d9db025edb",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -235,6 +235,30 @@ namespace iCubeTrain.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("iCubeTrain.Models.ChatHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Response")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserQuery")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChatHistories");
                 });
 
             modelBuilder.Entity("iCubeTrain.Models.Product", b =>

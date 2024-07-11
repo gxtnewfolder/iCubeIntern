@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatGptService {
-  private apiUrl = 'http://localhost:5032/api/multitag/analyze';
+  private apiUrl = 'http://localhost:5147/api/multitag/analyze';
   
 
   constructor(private http: HttpClient) { }

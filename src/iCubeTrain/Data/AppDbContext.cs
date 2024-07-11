@@ -33,6 +33,7 @@ namespace iCubeTrain.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<WeatherForecast> WeatherForecasts { get; set; }
+        public DbSet<ChatHistory> ChatHistories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

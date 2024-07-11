@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using iCubeTrain.Configurations;
+using iCubeTrain.Data;
 using iCubeTrain.Models;
 using iCubeTrain.Services;
 using iCubeTrain.Services.Interface;
@@ -20,16 +21,19 @@ namespace iCubeTrain.Controllers
         private readonly OpenAIService _openAIService;
         private readonly TokenCountService _tokenCountService;
 
+        private readonly AppDbContext _context;
+
         static MultiTagController()
         {
             MappingConfig.RegisterMapping();
         }
 
-        public MultiTagController(IUnitOfWork unitOfWork, OpenAIService openAIService, TokenCountService tokenCountService)
+        public MultiTagController(IUnitOfWork unitOfWork, OpenAIService openAIService, TokenCountService tokenCountService, AppDbContext context)
         {
             _unitOfWork = unitOfWork;
             _openAIService = openAIService;
             _tokenCountService = tokenCountService;
+            _context = context;
         }
 
         [HttpGet("getalldata")]
@@ -61,6 +65,16 @@ namespace iCubeTrain.Controllers
                 var tagDataList = data.Select(data => data.Adapt<TagValueData>()).ToList();
                 var result = AnalyzeJsonData(tagDataList);
                 var analysisSummary = await _openAIService.GetOpenAIResponse(result, prompt);
+
+                // Save chatbot analysis summary to the database
+                var chatHistory = new ChatHistory
+                {
+                    UserQuery = prompt,
+                    Response = analysisSummary,
+                    Timestamp = DateTime.Now
+                };
+                _context.ChatHistories.Add(chatHistory);
+                await _context.SaveChangesAsync();
 
                 // Calculate the token count of the analysis summary
                 var tokenCountAnalysisSummary = await _tokenCountService.GetTokenCountAsync(analysisSummary);
